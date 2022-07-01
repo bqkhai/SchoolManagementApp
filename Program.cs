@@ -1,7 +1,11 @@
+using SchoolManagementApp.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<SchoolManagementDbContext>();
 
 var app = builder.Build();
 
