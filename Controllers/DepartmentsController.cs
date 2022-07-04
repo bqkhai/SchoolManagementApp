@@ -81,7 +81,7 @@ namespace SchoolManagementApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["SchoolID"] = new SelectList(_context.schools, "SchoolID", "SchoolID", department.SchoolID);
+            ViewData["SchoolID"] = new SelectList(_context.schools, "SchoolID", "SchoolName", department.SchoolID);
             return View(department);
         }
 
