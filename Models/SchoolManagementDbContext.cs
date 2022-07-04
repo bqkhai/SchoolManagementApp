@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace SchoolManagementApp.Models
 {
@@ -9,11 +11,11 @@ namespace SchoolManagementApp.Models
         public DbSet<School> schools { get; set; }
         public DbSet<Department> departments { get; set; }
 
-        private readonly String connectionString = @"
-            Data Source=KHAIBQ3-D8\SQLEXPRESS;
-            Initial Catalog=SchoolManagementDB;
-            User ID=admin;
-            Password=1234;";
+        //private readonly String connectionString = @"
+        //    Data Source=KHAIBQ3-D8\SQLEXPRESS;
+        //    Initial Catalog=SchoolManagementDB;
+        //    User ID=admin;
+        //    Password=1234;";
 
         ILoggerFactory loggerFactory = LoggerFactory.Create(builder => {
             builder.AddFilter(DbLoggerCategory.Query.Name, LogLevel.Information);
@@ -22,15 +24,16 @@ namespace SchoolManagementApp.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //iconfigurationroot configuration = new configurationbuilder()
-            //    .setbasepath(appdomain.currentdomain.basedirectory)
-            //    .addjsonfile("appsettings.json")
-            //    .build();
-            //optionsbuilder.usesqlserver(configuration.getconnectionstring("defaultconnection"));
-
-            base.OnConfiguring(optionsBuilder);
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             optionsBuilder.UseLoggerFactory(loggerFactory);
-            optionsBuilder.UseSqlServer(connectionString);
+
+            //base.OnConfiguring(optionsBuilder);
+            //optionsBuilder.UseLoggerFactory(loggerFactory);
+            //optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
