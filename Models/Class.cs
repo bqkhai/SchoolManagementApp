@@ -7,7 +7,7 @@ namespace SchoolManagementApp.Models
         [Key]
         public int ClassId { get; set; }
 
-        public Department Department { get; set; }
+        public Department? Department { get; set; }
 
         public string ClassName { get; set; }
 

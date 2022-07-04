@@ -42,7 +42,7 @@ namespace SchoolManagementApp.Models
             {
                 entity.ToTable("schools");
                 entity.HasKey(p => p.SchoolID);
-
+                //entity.HasMany<Department>(d => d.Departments);
             });
 
             modelBuilder.Entity<Department>(entity =>

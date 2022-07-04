@@ -7,6 +7,8 @@ namespace SchoolManagementApp.Models
         [Key]
         public int SchoolID { get; set; }
 
+        public ICollection<Department>? Departments { get; set; }
+
         public string SchoolName { get; set; }
 
         public DateTime FoundedTime { get; set; }

@@ -28,4 +28,20 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "schools",
+    pattern: "{controller=Schools}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "departments",
+    pattern: "{controller=Departments}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "classes",
+    pattern: "{controller=Classes}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "users",
+    pattern: "{controller=Users}/{action=Index}/{id?}");
+
 app.Run();

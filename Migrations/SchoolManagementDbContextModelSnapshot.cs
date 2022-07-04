@@ -40,7 +40,7 @@ namespace SchoolManagementApp.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.HasKey("ClassId");
@@ -116,7 +116,7 @@ namespace SchoolManagementApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ClassId")
+                    b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -158,9 +158,7 @@ namespace SchoolManagementApp.Migrations
                 {
                     b.HasOne("SchoolManagementApp.Models.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentId");
 
                     b.Navigation("Department");
                 });
@@ -168,7 +166,7 @@ namespace SchoolManagementApp.Migrations
             modelBuilder.Entity("SchoolManagementApp.Models.Department", b =>
                 {
                     b.HasOne("SchoolManagementApp.Models.School", "School")
-                        .WithMany()
+                        .WithMany("Departments")
                         .HasForeignKey("SchoolID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -180,11 +178,14 @@ namespace SchoolManagementApp.Migrations
                 {
                     b.HasOne("SchoolManagementApp.Models.Class", "Class")
                         .WithMany()
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClassId");
 
                     b.Navigation("Class");
+                });
+
+            modelBuilder.Entity("SchoolManagementApp.Models.School", b =>
+                {
+                    b.Navigation("Departments");
                 });
 #pragma warning restore 612, 618
         }

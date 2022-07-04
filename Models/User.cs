@@ -8,9 +8,13 @@ namespace SchoolManagementApp.Models
         [Key]
         public int UserId { get; set; }
 
-        public Class Class { get; set; }
-
         public UserRole UserRole { get; set; }
+
+        public Class? Class { get; set; }
+
+        //public Department Department { get; set; }
+
+        //public School School { get; set; }
 
         public string UserName { get; set; }
 
