@@ -22,11 +22,11 @@ namespace SchoolManagementApp.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //IConfigurationRoot configuration = new ConfigurationBuilder()
-            //    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            //    .AddJsonFile("appsettings.json")
-            //    .Build();
-            //optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            //iconfigurationroot configuration = new configurationbuilder()
+            //    .setbasepath(appdomain.currentdomain.basedirectory)
+            //    .addjsonfile("appsettings.json")
+            //    .build();
+            //optionsbuilder.usesqlserver(configuration.getconnectionstring("defaultconnection"));
 
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseLoggerFactory(loggerFactory);
