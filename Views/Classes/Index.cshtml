@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ClassName)
             </th>
             <th>
@@ -21,12 +24,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.CreatedDate)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClassName)
             </td>
@@ -37,9 +43,18 @@
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ClassId">Edit</a> |
+                @*<a asp-action="Edit" asp-route-id="@item.ClassId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ClassId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClassId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.ClassId">Delete</a>*@
+                <a asp-action="Edit" asp-route-id="@item.ClassId" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Edit">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a> |
+                <a asp-action="Details" asp-route-id="@item.ClassId" class="btn btn-sm btn-info" data-toggle="tooltip" title="Detail">
+                    <i class="fa-solid fa-eye"></i>
+                </a> |
+                <a asp-action="Delete" asp-route-id="@item.ClassId" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete">
+                    <i class="far fa-trash-alt"></i>
+                </a>
             </td>
         </tr>
 }

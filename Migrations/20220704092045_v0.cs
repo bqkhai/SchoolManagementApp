@@ -53,7 +53,7 @@ namespace SchoolManagementApp.Migrations
                 {
                     ClassId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DepartmentId = table.Column<int>(type: "int", nullable: true),
+                    DepartmentID = table.Column<int>(type: "int", nullable: false),
                     ClassName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -62,10 +62,11 @@ namespace SchoolManagementApp.Migrations
                 {
                     table.PrimaryKey("PK_classes", x => x.ClassId);
                     table.ForeignKey(
-                        name: "FK_classes_departments_DepartmentId",
-                        column: x => x.DepartmentId,
+                        name: "FK_classes_departments_DepartmentID",
+                        column: x => x.DepartmentID,
                         principalTable: "departments",
-                        principalColumn: "DepartmentId");
+                        principalColumn: "DepartmentId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,9 +97,9 @@ namespace SchoolManagementApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_classes_DepartmentId",
+                name: "IX_classes_DepartmentID",
                 table: "classes",
-                column: "DepartmentId");
+                column: "DepartmentID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_departments_SchoolID",

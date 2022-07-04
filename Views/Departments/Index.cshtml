@@ -24,7 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.CreatedDate)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -43,9 +43,18 @@
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DepartmentId">Edit</a> |
+                @*<a asp-action="Edit" asp-route-id="@item.DepartmentId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.DepartmentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DepartmentId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.DepartmentId">Delete</a>*@
+                <a asp-action="Edit" asp-route-id="@item.DepartmentId" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Edit">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a> |
+                <a asp-action="Details" asp-route-id="@item.DepartmentId" class="btn btn-sm btn-info" data-toggle="tooltip" title="Detail">
+                    <i class="fa-solid fa-eye"></i>
+                </a> |
+                <a asp-action="Delete" asp-route-id="@item.DepartmentId" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete">
+                    <i class="far fa-trash-alt"></i>
+                </a>
             </td>
         </tr>
 }

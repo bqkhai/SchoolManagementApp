@@ -40,12 +40,12 @@ namespace SchoolManagementApp.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentID")
                         .HasColumnType("int");
 
                     b.HasKey("ClassId");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("DepartmentID");
 
                     b.ToTable("classes", (string)null);
                 });
@@ -158,7 +158,9 @@ namespace SchoolManagementApp.Migrations
                 {
                     b.HasOne("SchoolManagementApp.Models.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Department");
                 });

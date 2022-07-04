@@ -7,7 +7,9 @@ namespace SchoolManagementApp.Models
         [Key]
         public int ClassId { get; set; }
 
-        public Department? Department { get; set; }
+        public virtual Department? Department { get; set; }
+
+        public int DepartmentID { get; set; }
 
         public string ClassName { get; set; }
 

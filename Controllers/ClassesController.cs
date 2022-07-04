@@ -21,9 +21,8 @@ namespace SchoolManagementApp.Controllers
         // GET: Classes
         public async Task<IActionResult> Index()
         {
-              return _context.classes != null ? 
-                          View(await _context.classes.ToListAsync()) :
-                          Problem("Entity set 'SchoolManagementDbContext.classes'  is null.");
+            var schoolManagementDbContext = _context.classes.Include(c => c.Department);
+            return View(await schoolManagementDbContext.ToListAsync());
         }
 
         // GET: Classes/Details/5
@@ -35,6 +34,7 @@ namespace SchoolManagementApp.Controllers
             }
 
             var @class = await _context.classes
+                .Include(c => c.Department)
                 .FirstOrDefaultAsync(m => m.ClassId == id);
             if (@class == null)
             {
@@ -47,6 +47,7 @@ namespace SchoolManagementApp.Controllers
         // GET: Classes/Create
         public IActionResult Create()
         {
+            ViewData["DepartmentID"] = new SelectList(_context.departments, "DepartmentId", "DepartmentName");
             return View();
         }
 
@@ -55,7 +56,7 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClassId,ClassName,Capacity,CreatedDate")] Class @class)
+        public async Task<IActionResult> Create([Bind("ClassId,DepartmentID,ClassName,Capacity,CreatedDate")] Class @class)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +64,7 @@ namespace SchoolManagementApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DepartmentID"] = new SelectList(_context.departments, "DepartmentId", "DepartmentId", @class.DepartmentID);
             return View(@class);
         }
 
@@ -79,6 +81,7 @@ namespace SchoolManagementApp.Controllers
             {
                 return NotFound();
             }
+            ViewData["DepartmentID"] = new SelectList(_context.departments, "DepartmentId", "DepartmentName", @class.DepartmentID);
             return View(@class);
         }
 
@@ -87,7 +90,7 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClassId,ClassName,Capacity,CreatedDate")] Class @class)
+        public async Task<IActionResult> Edit(int id, [Bind("ClassId,DepartmentID,ClassName,Capacity,CreatedDate")] Class @class)
         {
             if (id != @class.ClassId)
             {
@@ -114,6 +117,7 @@ namespace SchoolManagementApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DepartmentID"] = new SelectList(_context.departments, "DepartmentId", "DepartmentId", @class.DepartmentID);
             return View(@class);
         }
 
@@ -126,6 +130,7 @@ namespace SchoolManagementApp.Controllers
             }
 
             var @class = await _context.classes
+                .Include(c => c.Department)
                 .FirstOrDefaultAsync(m => m.ClassId == id);
             if (@class == null)
             {
