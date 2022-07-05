@@ -1,6 +1,17 @@
 using SchoolManagementApp.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SchoolManagementApp.Data;
+using SchoolManagementApp.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("SchoolManagementAppContextConnection") ?? throw new InvalidOperationException("Connection string 'SchoolManagementAppContextConnection' not found.");
+
+builder.Services.AddDbContext<SchoolManagementAppContext>(options =>
+    options.UseSqlServer(connectionString));;
+
+builder.Services.AddDefaultIdentity<SchoolManagementAppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<SchoolManagementAppContext>();;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -21,6 +32,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
@@ -43,5 +55,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "users",
     pattern: "{controller=Users}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

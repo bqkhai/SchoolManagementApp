@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Project\\SchoolManagementApp\\SchoolManagementApp.csproj": {}
+    "F:\\SchoolManagementApp\\SchoolManagementApp.csproj": {}
   },
   "projects": {
-    "F:\\Project\\SchoolManagementApp\\SchoolManagementApp.csproj": {
+    "F:\\SchoolManagementApp\\SchoolManagementApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Project\\SchoolManagementApp\\SchoolManagementApp.csproj",
+        "projectUniqueName": "F:\\SchoolManagementApp\\SchoolManagementApp.csproj",
         "projectName": "SchoolManagementApp",
-        "projectPath": "F:\\Project\\SchoolManagementApp\\SchoolManagementApp.csproj",
+        "projectPath": "F:\\SchoolManagementApp\\SchoolManagementApp.csproj",
         "packagesPath": "C:\\Users\\KhaiBQ3\\.nuget\\packages\\",
-        "outputPath": "F:\\Project\\SchoolManagementApp\\obj\\",
+        "outputPath": "F:\\SchoolManagementApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\KhaiBQ3\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,10 @@
               "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[6.0.6, )"
             },
