@@ -1,5 +1,6 @@
 ﻿using SchoolManagementApp.Enum;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagementApp.Models
 {
@@ -8,28 +9,45 @@ namespace SchoolManagementApp.Models
         [Key]
         public int UserId { get; set; }
 
+        [Required]
         public UserRole UserRole { get; set; }
 
+        //[Required]
         public Class? Class { get; set; }
 
         //public Department Department { get; set; }
 
         //public School School { get; set; }
 
-        public string UserName { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        [Required(ErrorMessage = "This field is required")]
+        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Length must be between 5 to 50")]
+        public string? UserName { get; set; }
 
-        public string FullName { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        [Required(ErrorMessage = "This field is required")]
+        [StringLength(maximumLength: 50, MinimumLength = 10, ErrorMessage = "Length must be between 10 to 50")]
+        public string? FullName { get; set; }
 
-        public string Email { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        public string? Email { get; set; }
 
+        [Required(ErrorMessage = "This field is required")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DoB { get; set; }
 
-        public string Address { get; set; }
+        [Column(TypeName = "nvarchar(250)")]
+        [Required(ErrorMessage = "This field is required")]
+        [StringLength(maximumLength: 250, MinimumLength = 5, ErrorMessage = "Length must be between 5 to 250")]
+        public string? Address { get; set; }
 
         public bool isDeleted { get; set; }
 
-        public string Password { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        public string? Password { get; set; }
 
+        [Required(ErrorMessage = "This field is required")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime CreatedDate { get; set; }
     }
 }
