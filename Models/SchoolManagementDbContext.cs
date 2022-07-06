@@ -11,12 +11,6 @@ namespace SchoolManagementApp.Models
         public DbSet<School> schools { get; set; }
         public DbSet<Department> departments { get; set; }
 
-        //private readonly String connectionString = @"
-        //    Data Source=KHAIBQ3-D8\SQLEXPRESS;
-        //    Initial Catalog=SchoolManagementDB;
-        //    User ID=admin;
-        //    Password=1234;";
-
         ILoggerFactory loggerFactory = LoggerFactory.Create(builder => {
             builder.AddFilter(DbLoggerCategory.Query.Name, LogLevel.Information);
             builder.AddConsole();
@@ -30,10 +24,6 @@ namespace SchoolManagementApp.Models
                 .Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             optionsBuilder.UseLoggerFactory(loggerFactory);
-
-            //base.OnConfiguring(optionsBuilder);
-            //optionsBuilder.UseLoggerFactory(loggerFactory);
-            //optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,7 +35,6 @@ namespace SchoolManagementApp.Models
             {
                 entity.ToTable("schools");
                 entity.HasKey(p => p.SchoolID);
-                //entity.HasMany<Department>(d => d.Departments);
             });
 
             modelBuilder.Entity<Department>(entity =>

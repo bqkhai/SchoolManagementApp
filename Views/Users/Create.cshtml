@@ -20,6 +20,10 @@
                 <span asp-validation-for="UserRole" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ClassID" class="control-label"></label>
+                <select asp-for="ClassID" class ="form-control" asp-items="ViewBag.ClassID"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
                 <input asp-for="UserName" class="form-control" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
@@ -44,15 +48,20 @@
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            @*<div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="isDeleted" /> @Html.DisplayNameFor(model => model.isDeleted)
                 </label>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreatedDate" class="control-label"></label>

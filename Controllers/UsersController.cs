@@ -21,9 +21,8 @@ namespace SchoolManagementApp.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-              return _context.users != null ? 
-                          View(await _context.users.ToListAsync()) :
-                          Problem("Entity set 'SchoolManagementDbContext.users'  is null.");
+            var schoolManagementDbContext = _context.users.Include(u => u.Class);
+            return View(await schoolManagementDbContext.ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -47,6 +46,7 @@ namespace SchoolManagementApp.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
+            ViewData["ClassID"] = new SelectList(_context.classes, "ClassId", "ClassName");
             return View();
         }
 
@@ -55,7 +55,7 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,UserRole,UserName,FullName,Email,DoB,Address,isDeleted,Password,CreatedDate")] User user)
+        public async Task<IActionResult> Create([Bind("UserId,UserRole,ClassID,UserName,FullName,Email,DoB,Address,Password,ConfirmPassword,CreatedDate")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +63,7 @@ namespace SchoolManagementApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClassID"] = new SelectList(_context.classes, "ClassID", "ClassID", user.ClassID);
             return View(user);
         }
 
@@ -87,7 +88,7 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserRole,UserName,FullName,Email,DoB,Address,isDeleted,Password,CreatedDate")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserRole,ClassID,UserName,FullName,Email,DoB,Address,Password,ConfirmPassword,CreatedDate")] User user)
         {
             if (id != user.UserId)
             {

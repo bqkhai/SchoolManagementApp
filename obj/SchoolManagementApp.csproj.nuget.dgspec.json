@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\SchoolManagementApp\\SchoolManagementApp.csproj": {}
+    "F:\\Project\\SchoolManagementApp\\SchoolManagementApp.csproj": {}
   },
   "projects": {
-    "F:\\SchoolManagementApp\\SchoolManagementApp.csproj": {
+    "F:\\Project\\SchoolManagementApp\\SchoolManagementApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\SchoolManagementApp\\SchoolManagementApp.csproj",
+        "projectUniqueName": "F:\\Project\\SchoolManagementApp\\SchoolManagementApp.csproj",
         "projectName": "SchoolManagementApp",
-        "projectPath": "F:\\SchoolManagementApp\\SchoolManagementApp.csproj",
+        "projectPath": "F:\\Project\\SchoolManagementApp\\SchoolManagementApp.csproj",
         "packagesPath": "C:\\Users\\KhaiBQ3\\.nuget\\packages\\",
-        "outputPath": "F:\\SchoolManagementApp\\obj\\",
+        "outputPath": "F:\\Project\\SchoolManagementApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\KhaiBQ3\\AppData\\Roaming\\NuGet\\NuGet.Config",

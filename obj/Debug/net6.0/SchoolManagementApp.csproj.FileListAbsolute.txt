@@ -539,3 +539,6 @@ F:\SchoolManagementApp\obj\Debug\net6.0\ref\SchoolManagementApp.dll
 F:\SchoolManagementApp\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
 F:\SchoolManagementApp\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
 F:\SchoolManagementApp\obj\Debug\net6.0\SchoolManagementApp.MvcApplicationPartsAssemblyInfo.cs
+F:\Project\SchoolManagementApp\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
+F:\Project\SchoolManagementApp\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
+F:\Project\SchoolManagementApp\obj\Debug\net6.0\SchoolManagementApp.MvcApplicationPartsAssemblyInfo.cs

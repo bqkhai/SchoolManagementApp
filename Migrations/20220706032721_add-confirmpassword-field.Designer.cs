@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolManagementApp.Models;
 
@@ -11,9 +12,10 @@ using SchoolManagementApp.Models;
 namespace SchoolManagementApp.Migrations
 {
     [DbContext(typeof(SchoolManagementDbContext))]
-    partial class SchoolManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220706032721_add-confirmpassword-field")]
+    partial class addconfirmpasswordfield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,7 +121,7 @@ namespace SchoolManagementApp.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int>("ClassID")
+                    b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConfirmPassword")
@@ -158,7 +160,7 @@ namespace SchoolManagementApp.Migrations
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("ClassID");
+                    b.HasIndex("ClassId");
 
                     b.ToTable("users", (string)null);
                 });
@@ -189,9 +191,7 @@ namespace SchoolManagementApp.Migrations
                 {
                     b.HasOne("SchoolManagementApp.Models.Class", "Class")
                         .WithMany()
-                        .HasForeignKey("ClassID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClassId");
 
                     b.Navigation("Class");
                 });

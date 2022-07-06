@@ -13,7 +13,9 @@ namespace SchoolManagementApp.Models
         public UserRole UserRole { get; set; }
 
         //[Required]
-        public Class? Class { get; set; }
+        public virtual Class? Class { get; set; }
+
+        public int ClassID { get; set; }
 
         //public Department Department { get; set; }
 
@@ -41,10 +43,16 @@ namespace SchoolManagementApp.Models
         [StringLength(maximumLength: 250, MinimumLength = 5, ErrorMessage = "Length must be between 5 to 250")]
         public string? Address { get; set; }
 
-        public bool isDeleted { get; set; }
+        public bool? isDeleted { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Password)]
         public string? Password { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "The Password and ConfirmPassword fields must match")]
+        public string? ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
