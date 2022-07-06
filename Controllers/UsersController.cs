@@ -80,6 +80,7 @@ namespace SchoolManagementApp.Controllers
             {
                 return NotFound();
             }
+            ViewData["ClassID"] = new SelectList(_context.classes, "ClassId", "ClassName", user.ClassID);
             return View(user);
         }
 
@@ -115,6 +116,7 @@ namespace SchoolManagementApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClassID"] = new SelectList(_context.classes, "ClassID", "ClassID", user.ClassID);
             return View(user);
         }
 
