@@ -56,6 +56,10 @@ app.MapControllerRoute(
     name: "users",
     pattern: "{controller=Users}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "roles",
+    pattern: "{controller=Roles}/{action=Create}");
+
 app.MapRazorPages();
 
 app.Run();
