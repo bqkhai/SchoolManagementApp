@@ -63,14 +63,34 @@ namespace SchoolManagementApp.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("ClassId,DepartmentID,ClassName,Capacity,CreatedDate")] Class @class)
         {
-            if (ModelState.IsValid)
+            var qr = from c in _context.classes
+                     select c.Capacity;
+            var sum_diff_class_capacity = qr.Sum();
+
+            var qr2 = from c in _context.classes
+                      join d in _context.departments
+                      on c.DepartmentID equals d.DepartmentId
+                      select d.Capacity;
+            var max_capacity = qr2.FirstOrDefault();
+
+            var empty_capacity = max_capacity - sum_diff_class_capacity;
+
+            if (@class.Capacity <= empty_capacity)
             {
-                _context.Add(@class);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(@class);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["DepartmentID"] = new SelectList(_context.departments, "DepartmentId", "DepartmentId", @class.DepartmentID);
+                return View(@class);
             }
-            ViewData["DepartmentID"] = new SelectList(_context.departments, "DepartmentId", "DepartmentId", @class.DepartmentID);
-            return View(@class);
+            else
+            {
+                ModelState.AddModelError("Capacity", "Sức chứa không hợp lệ");
+                return View(@class);
+            }
         }
 
         // GET: Classes/Edit/5
@@ -171,6 +191,17 @@ namespace SchoolManagementApp.Controllers
         private bool ClassExists(int id)
         {
           return (_context.classes?.Any(e => e.ClassId == id)).GetValueOrDefault();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> IsAlreadyExist(string ClassName)
+        {
+            //check the class name is exists in the database.
+            if (_context.classes.Any(x => x.ClassName == ClassName))
+            {
+                return Json(false);
+            }
+            return Json(true);
         }
     }
 }

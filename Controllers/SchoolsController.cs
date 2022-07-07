@@ -167,5 +167,16 @@ namespace SchoolManagementApp.Controllers
         {
           return (_context.schools?.Any(e => e.SchoolID == id)).GetValueOrDefault();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> IsAlreadyExist(string SchoolName)
+        {
+            //check the school name is exists in the database.
+            if (_context.schools.Any(x => x.SchoolName == SchoolName))
+            {
+                return Json(false);
+            }
+            return Json(true);
+        }
     }
 }

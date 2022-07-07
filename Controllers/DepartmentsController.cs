@@ -63,14 +63,33 @@ namespace SchoolManagementApp.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("DepartmentId,SchoolID,DepartmentName,Capacity,CreatedDate")] Department department)
         {
-            if (ModelState.IsValid)
+            var qr = from d in _context.departments
+                     select d.Capacity;
+            var sum_diff_department_capacity = qr.Sum();
+
+            var qr2 = from d in _context.departments
+                               join s in _context.schools
+                               on d.SchoolID equals s.SchoolID
+                               select s.Capacity;
+            var max_capacity = qr2.FirstOrDefault();
+
+            var empty_capacity = max_capacity - sum_diff_department_capacity;
+            if(department.Capacity <= empty_capacity)
             {
-                _context.Add(department);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(department);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["SchoolID"] = new SelectList(_context.schools, "SchoolID", "SchoolID", department.SchoolID);
+                return View(department);
             }
-            ViewData["SchoolID"] = new SelectList(_context.schools, "SchoolID", "SchoolID", department.SchoolID);
-            return View(department);
+            else
+            {
+                ModelState.AddModelError("Capacity", "Sức chứa không hợp lệ");
+                return View(department);
+            }
         }
 
         // GET: Departments/Edit/5
@@ -171,6 +190,17 @@ namespace SchoolManagementApp.Controllers
         private bool DepartmentExists(int id)
         {
           return (_context.departments?.Any(e => e.DepartmentId == id)).GetValueOrDefault();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> IsAlreadyExist(string DepartmentName)
+        {
+            //check the department name is exists in the database.
+            if (_context.departments.Any(x => x.DepartmentName.ToString() == DepartmentName))
+            {
+                return Json(false);
+            }
+            return Json(true);
         }
     }
 }
