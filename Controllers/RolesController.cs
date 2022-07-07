@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using SchoolManagementApp.ViewModels;
@@ -14,6 +15,7 @@ namespace SchoolManagementApp.Controllers
             _roleManager = roleManager;
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Index()
         {
             return View(_roleManager.Roles.ToList());
