@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Users/Details/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.users == null)
@@ -44,6 +46,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Users/Create
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             ViewData["ClassID"] = new SelectList(_context.classes, "ClassId", "ClassName");
@@ -55,7 +58,8 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,UserRole,ClassID,UserName,FullName,Email,DoB,Address,Password,ConfirmPassword,CreatedDate")] User user)
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> Create([Bind("UserId,UserRole,ClassID,UserName,FullName,Email,DoB,Address,isDeleted,Password,ConfirmPassword,CreatedDate")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +72,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Users/Edit/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.users == null)
@@ -89,6 +94,7 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, [Bind("UserId,UserRole,ClassID,UserName,FullName,Email,DoB,Address,Password,ConfirmPassword,CreatedDate")] User user)
         {
             if (id != user.UserId)
@@ -121,6 +127,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Users/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.users == null)
@@ -141,6 +148,7 @@ namespace SchoolManagementApp.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.users == null)

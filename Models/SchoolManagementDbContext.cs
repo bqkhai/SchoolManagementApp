@@ -53,6 +53,7 @@ namespace SchoolManagementApp.Models
             {
                 entity.ToTable("users");
                 entity.HasKey(p => p.UserId);
+                entity.Property("isDeleted").HasDefaultValue(false);
             });
         }
     }

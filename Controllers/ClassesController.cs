@@ -28,6 +28,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Classes/Details/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.classes == null)
@@ -47,6 +48,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Classes/Create
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             ViewData["DepartmentID"] = new SelectList(_context.departments, "DepartmentId", "DepartmentName");
@@ -58,6 +60,7 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("ClassId,DepartmentID,ClassName,Capacity,CreatedDate")] Class @class)
         {
             if (ModelState.IsValid)
@@ -71,6 +74,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Classes/Edit/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.classes == null)
@@ -92,6 +96,7 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, [Bind("ClassId,DepartmentID,ClassName,Capacity,CreatedDate")] Class @class)
         {
             if (id != @class.ClassId)
@@ -124,6 +129,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Classes/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.classes == null)
@@ -145,6 +151,7 @@ namespace SchoolManagementApp.Controllers
         // POST: Classes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.classes == null)

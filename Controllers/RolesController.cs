@@ -15,7 +15,7 @@ namespace SchoolManagementApp.Controllers
             _roleManager = roleManager;
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public IActionResult Index()
         {
             return View(_roleManager.Roles.ToList());
@@ -28,6 +28,7 @@ namespace SchoolManagementApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Create(CreateRoleViewModel model)
         {
             { }
@@ -45,6 +46,7 @@ namespace SchoolManagementApp.Controllers
             return View(model);
         }
 
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)

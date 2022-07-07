@@ -153,8 +153,10 @@ namespace SchoolManagementApp.Migrations
                     b.Property<int>("UserRole")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("isDeleted")
-                        .HasColumnType("bit");
+                    b.Property<bool>("isDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("UserId");
 

@@ -11,17 +11,21 @@ namespace SchoolManagementApp.Models
         public ICollection<Department>? Departments { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
+        [Display(Name = "Tên trường")]
         public string SchoolName { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Ngày thành lập")]
         public DateTime FoundedTime { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
+        [Display(Name = "Sức chứa")]
         public int Capacity { get; set; }
 
         [Column(TypeName = "nvarchar(250)")]
         [Required(ErrorMessage = "This field is required")]
+        [Display(Name = "Địa chỉ")]
         [StringLength(maximumLength: 250, MinimumLength = 5, ErrorMessage = "Length must be between 5 to 250")]
         public string Address { get; set; }
     }

@@ -18,7 +18,7 @@ namespace SchoolManagementApp.Migrations
                     SchoolName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FoundedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +54,7 @@ namespace SchoolManagementApp.Migrations
                     ClassId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DepartmentID = table.Column<int>(type: "int", nullable: false),
-                    ClassName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClassName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -76,24 +76,26 @@ namespace SchoolManagementApp.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserRole = table.Column<int>(type: "int", nullable: false),
-                    ClassId = table.Column<int>(type: "int", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClassID = table.Column<int>(type: "int", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DoB = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConfirmPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_users", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_users_classes_ClassId",
-                        column: x => x.ClassId,
+                        name: "FK_users_classes_ClassID",
+                        column: x => x.ClassID,
                         principalTable: "classes",
-                        principalColumn: "ClassId");
+                        principalColumn: "ClassId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -107,9 +109,9 @@ namespace SchoolManagementApp.Migrations
                 column: "SchoolID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_users_ClassId",
+                name: "IX_users_ClassID",
                 table: "users",
-                column: "ClassId");
+                column: "ClassID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

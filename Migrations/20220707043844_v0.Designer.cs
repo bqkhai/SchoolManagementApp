@@ -12,8 +12,8 @@ using SchoolManagementApp.Models;
 namespace SchoolManagementApp.Migrations
 {
     [DbContext(typeof(SchoolManagementDbContext))]
-    [Migration("20220705032811_v1")]
-    partial class v1
+    [Migration("20220707043844_v0")]
+    partial class v0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -121,8 +121,12 @@ namespace SchoolManagementApp.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int?>("ClassId")
+                    b.Property<int>("ClassID")
                         .HasColumnType("int");
+
+                    b.Property<string>("ConfirmPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -152,11 +156,13 @@ namespace SchoolManagementApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("ClassId");
+                    b.HasIndex("ClassID");
 
                     b.ToTable("users", (string)null);
                 });
@@ -187,7 +193,9 @@ namespace SchoolManagementApp.Migrations
                 {
                     b.HasOne("SchoolManagementApp.Models.Class", "Class")
                         .WithMany()
-                        .HasForeignKey("ClassId");
+                        .HasForeignKey("ClassID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Class");
                 });

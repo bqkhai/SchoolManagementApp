@@ -12,8 +12,8 @@ using SchoolManagementApp.Data;
 namespace SchoolManagementApp.Migrations.SchoolManagementApp
 {
     [DbContext(typeof(SchoolManagementAppContext))]
-    [Migration("20220705101425_using-identity")]
-    partial class usingidentity
+    [Migration("20220707043910_identity")]
+    partial class identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

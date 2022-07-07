@@ -29,6 +29,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Schools/Details/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.schools == null)
@@ -47,6 +48,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Schools/Create
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -57,6 +59,7 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("SchoolID,SchoolName,FoundedTime,Capacity,Address")] School school)
         {
             if (ModelState.IsValid)
@@ -69,6 +72,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Schools/Edit/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.schools == null)
@@ -89,6 +93,7 @@ namespace SchoolManagementApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, [Bind("SchoolID,SchoolName,FoundedTime,Capacity,Address")] School school)
         {
             if (id != school.SchoolID)
@@ -120,6 +125,7 @@ namespace SchoolManagementApp.Controllers
         }
 
         // GET: Schools/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.schools == null)
@@ -140,6 +146,7 @@ namespace SchoolManagementApp.Controllers
         // POST: Schools/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.schools == null)
