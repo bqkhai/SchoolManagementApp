@@ -10,7 +10,8 @@ var connectionString = builder.Configuration.GetConnectionString("SchoolManageme
 builder.Services.AddDbContext<SchoolManagementAppContext>(options =>
     options.UseSqlServer(connectionString));;
 
-builder.Services.AddDefaultIdentity<SchoolManagementAppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<SchoolManagementAppUser> (options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<SchoolManagementAppContext>();;
 
 // Add services to the container.
@@ -58,7 +59,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "roles",
-    pattern: "{controller=Roles}/{action=Create}");
+    pattern: "{controller=Roles}/{action=Index}");
 
 app.MapRazorPages();
 
